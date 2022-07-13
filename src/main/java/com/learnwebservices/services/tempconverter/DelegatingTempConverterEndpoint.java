@@ -27,4 +27,10 @@ public class DelegatingTempConverterEndpoint implements TempConverterEndpoint {
         double temperatureInCelsius = tempConverterService.convertFahrenheitToCelsius(temperatureInFahrenheit);
         return new FahrenheitToCelsiusResponse(temperatureInCelsius);
     }
+    
+    public ConversionHistoryResponse conversionHistory(ConversionHistoryRequest request) {
+        double hello = request.getHello();
+        double resHello = tempConverterService.conversionHistory(hello);
+        return new ConversionHistoryResponse(resHello);
+    }
 }

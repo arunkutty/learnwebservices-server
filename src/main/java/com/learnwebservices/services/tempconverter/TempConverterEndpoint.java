@@ -21,4 +21,10 @@ public interface TempConverterEndpoint {
     @WebResult(name = "FahrenheitToCelsiusResponse")
     @XmlElement(required = true)
     FahrenheitToCelsiusResponse convertToCelsius(@WebParam(name = "FahrenheitToCelsiusRequest") @XmlElement(required = true)FahrenheitToCelsiusRequest request);
+    
+    @WebMethod(operationName = "ConversionHistory")
+    @WebResult(name = "ConversionHistoryResponse")
+    @XmlElement(required = true)
+    ConversionHistoryResponse conversionHistory(@WebParam(name = "ConversionHistoryRequest") @XmlElement(required = true)ConversionHistoryRequest request);
+
 }

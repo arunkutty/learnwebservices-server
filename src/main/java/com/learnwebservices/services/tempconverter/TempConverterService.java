@@ -12,4 +12,8 @@ public class TempConverterService {
     public double convertFahrenheitToCelsius(double temperatureInFahrenheit) {
         return (temperatureInFahrenheit - 32) / (9 / 5.0);
     }
+    
+    public double conversionHistory(double hello) {
+    	return 1;
+    }
 }
