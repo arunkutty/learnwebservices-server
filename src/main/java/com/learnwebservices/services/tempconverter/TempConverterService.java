@@ -1,9 +1,13 @@
 package com.learnwebservices.services.tempconverter;
 
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -29,11 +33,27 @@ public class TempConverterService {
 
     public double convertFahrenheitToCelsius(double temperatureInFahrenheit) {
     	double temperatureInCelsius = (temperatureInFahrenheit - 32) / (9 / 5.0);
-        writeRequestHistory("Celsius to Fahrenheit", temperatureInFahrenheit, temperatureInCelsius);
+        writeRequestHistory("Fahrenheit to Celsius", temperatureInFahrenheit, temperatureInCelsius);
         return temperatureInCelsius;
     }
     
-    public Iterable<RequestLogItem> getConversionHistory(double hello) {
-    	return requestLogRepository.findAll();
+    public Iterable<RequestLogItem> getConversionHistory(int numOfRecords) {
+    	int pageSize = 5;
+    	Pageable currentPage = Pageable.ofSize(pageSize);
+		int pageCounter = 1; 
+		List<RequestLogItem> requests = new ArrayList<RequestLogItem>();
+		while (pageCounter*pageSize <= numOfRecords) {
+			Iterator<RequestLogItem> requestsIter = requestLogRepository.findAll(currentPage).iterator();
+			while (requestsIter.hasNext()) {
+				requests.add(requestsIter.next());
+			}
+			if (currentPage.getPageSize() <= pageSize) {
+				currentPage = currentPage.next();
+				pageCounter++;
+			} else {
+				break;
+			}	
+		}
+    	return requests;
     }
 }

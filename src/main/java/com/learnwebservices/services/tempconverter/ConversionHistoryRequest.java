@@ -14,7 +14,11 @@ import javax.xml.bind.annotation.XmlElement;
 @AllArgsConstructor
 public class ConversionHistoryRequest {
 
-    @XmlElement(name = "hello", required = true)
-    private double hello;
+    public int getNumOfRecords() {
+		return numOfRecords;
+	}
+
+	@XmlElement(name = "numOfRecords", required = true)
+    private int numOfRecords;
 
 }

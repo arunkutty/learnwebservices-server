@@ -33,9 +33,9 @@ public class DelegatingTempConverterEndpoint implements TempConverterEndpoint {
     }
     
     public ConversionHistoryResponse conversionHistory(ConversionHistoryRequest request) {
-        double hello = request.getHello();
+        int numOfRecords = request.getNumOfRecords();
     	ConversionHistoryResponse requestLogResponse = new ConversionHistoryResponse();
-        Iterator<RequestLogItem> items = tempConverterService.getConversionHistory(hello).iterator();
+        Iterator<RequestLogItem> items = tempConverterService.getConversionHistory(numOfRecords).iterator();
     	List <RequestLogItemResponse> requestLogItems = new ArrayList <RequestLogItemResponse>();
     	while (items.hasNext()) {
     		RequestLogItem currItem = items.next();
