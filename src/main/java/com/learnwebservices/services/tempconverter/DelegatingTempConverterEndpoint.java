@@ -48,7 +48,6 @@ public class DelegatingTempConverterEndpoint implements TempConverterEndpoint {
     						currItem.getOutput());
     		requestLogItems.add(itemForResponse);
     	}
-    	System.out.println("RequestLogItems = " + requestLogItems);
     			
     	requestLogResponse.setConversionRequestLog(requestLogItems);
     	return requestLogResponse;

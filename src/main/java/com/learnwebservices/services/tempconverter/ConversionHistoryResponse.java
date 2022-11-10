@@ -29,7 +29,6 @@ public class ConversionHistoryResponse {
 
 	public void setConversionRequestLog(List<RequestLogItemResponse> requestLogItems) {
 		this.conversionRequestLog = (List<RequestLogItemResponse>) requestLogItems;
-		System.out.println("xml object is " + this.conversionRequestLog);
 	}
     
     }
