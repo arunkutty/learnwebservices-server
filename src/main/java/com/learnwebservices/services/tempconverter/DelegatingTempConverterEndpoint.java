@@ -2,6 +2,10 @@ package com.learnwebservices.services.tempconverter;
 
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import javax.jws.WebService;
 
 @Service
@@ -30,7 +34,23 @@ public class DelegatingTempConverterEndpoint implements TempConverterEndpoint {
     
     public ConversionHistoryResponse conversionHistory(ConversionHistoryRequest request) {
         double hello = request.getHello();
-        double resHello = tempConverterService.conversionHistory(hello);
-        return new ConversionHistoryResponse(resHello);
+    	ConversionHistoryResponse requestLogResponse = new ConversionHistoryResponse();
+        Iterator<RequestLogItem> items = tempConverterService.getConversionHistory(hello).iterator();
+    	List <RequestLogItemResponse> requestLogItems = new ArrayList <RequestLogItemResponse>();
+    	while (items.hasNext()) {
+    		RequestLogItem currItem = items.next();
+    		
+    		RequestLogItemResponse itemForResponse = new RequestLogItemResponse();
+    		itemForResponse.setRequestLogItemResponse(currItem.getId(),
+    						currItem.getRequestType(),
+    						currItem.getRequestDate(),
+    						currItem.getInput(),
+    						currItem.getOutput());
+    		requestLogItems.add(itemForResponse);
+    	}
+    	System.out.println("RequestLogItems = " + requestLogItems);
+    			
+    	requestLogResponse.setConversionRequestLog(requestLogItems);
+    	return requestLogResponse;
     }
 }
