@@ -1,39 +1,58 @@
-# Repository for learnwebservices.com server application
+# SOA Testing sample app
 
-This repository contains the source of the Spring Boot server application 
-that serves the web services on http://learnwebservices.com site.
+This repository contains the source code for an enhanced "learnwebservices" sample application containing an additional service endpoint "ConversionHistory" to get a list of all temperature conversion requests that the server received. To do so, the application persists the requests it receive to a database.
 
-The main purpose of this site to provide a free, public, sample SOAP webservices
-for everyone. These webservices are designed to long live, so they can be
-used in tutorials, videos, blog posts, Stack Overflow, etc.
+You can find the original repository's README file [here](./README-original-repo.md).
 
-## Run with Maven
+## Run with the embedded H2 database (dev mode)
 
-If you have at least 11 version of JDK installed, clone the
-repository, then run the application with
-the following command in the root folder of the project.
+To run this application with an embedded in-memory H2 database (typically for development purposes), either run with the dev profile activated or run the following command in the root folder of the project: 
+(Note: You must have a JDK version 11 or above installed.)
 
 ```shell
 mvnw spring-boot:run
 ```
 
-Then check the `http://localhost:8080` address!
+The application will be available at: `http://localhost:8080`.
 
-## Run with Docker
+## Running in production
 
-If you have Docker installed run the application with the following command.
-No source is needed, it will download the latest Docker image from
-Docker Hub.
+Install MySQL version 8. You can find the installer [here](https://dev.mysql.com/downloads/installer/).
+(You can opt to install the Database Server alone.)
+Typically, MySQL starts up automatically post installation; if not, start it manually.
+
+Afterwards, as a one time post-installation step, create the lwsapp database for the application to use. The steps are:
+1) Locate the command line client in the  MySQL installation folder (In Windows this would be mysql.exe at C:\Program Files\MySQL\MySQL Server 8.0\bin)
+2) In a command terminal, cd to the above folder and the run the following to access the mysql client prompt: 
 
 ```shell
-docker run -p 8080:8080 --name my-lwsapp vicziani/lwsapp
+mysql.exe --user=root --password=password
+```
+At the mysql> prompt, run the following: 
+
+```shell
+create database lwsapp;
 ```
 
-Then check the `http://localhost:8080` address!
+To launch the application, first build it with the following command: 
 
-## About the author
+```shell
+mvnw clean install
+```
 
-This site was developed by István Viczián, the author of the http://jtechlog.hu blog.
+(Note: you'd have to do the above only for: a) the first time after the repo is cloned, and b) if the code is changed.
+
+To start the application in the production mode, run the following command: 
+
+```shell
+java -jar -Dspring.profiles.active=prod target\lwsapp.jar
+```
+
+The application will be available at: `http://localhost:8080`.
+
+## Author
+
+The application is maintained by Arun Kutty (kutty.a@hcl.com); contact him to report issues.
 
 ## Licence
 

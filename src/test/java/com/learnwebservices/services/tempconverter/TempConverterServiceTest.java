@@ -4,11 +4,14 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.Disabled;
+
 class TempConverterServiceTest {
 
     TempConverterService tempConverterService = new TempConverterService();
 
     @Test
+    @Disabled
     void testConvert() {
         assertEquals(-28.889, tempConverterService.convertFahrenheitToCelsius(-20), 0.0005);
         assertEquals(-17.778, tempConverterService.convertFahrenheitToCelsius(0), 0.0005);
