@@ -52,7 +52,7 @@ The application will be available at: `http://localhost:8080`.
 
 ## Author
 
-The application is maintained by Arun Kutty (kutty.a@hcl.com); contact him to report issues.
+The application is maintained by Arun Kutty (kutty.a@gmail.com); contact him to report issues.
 
 ## Licence
 
